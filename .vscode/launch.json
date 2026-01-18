@@ -12,7 +12,7 @@
             "args": [
                 "--debug",
                 "-c",
-                "/config"
+                "./config"
             ],
             "justMyCode": false,
             "console": "internalConsole"
