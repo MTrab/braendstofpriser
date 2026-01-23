@@ -145,6 +145,11 @@ class BraendstofpriserConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             # Process the user input and create the device
             # Create the device entry
+            config_options = {
+                CONF_PRODUCTS: user_input,
+                CONF_API_KEY: self.user_input[CONF_API_KEY],
+            }
+
             return self.async_create_entry(
                 title=f"{self.user_input[CONF_COMPANY]}, {self.stations[self.user_input[CONF_STATION]]['name']}",
                 data={
@@ -152,7 +157,7 @@ class BraendstofpriserConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     CONF_STATION: self.user_input[CONF_STATION],
                 },
                 description=f"{self.user_input[CONF_COMPANY]}, {self.stations[self.user_input[CONF_STATION]]['name']}",
-                options=user_input,
+                options=config_options,
             )
 
         # Get available products and translate the system names to human readable

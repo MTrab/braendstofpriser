@@ -23,9 +23,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     integration = await async_get_integration(hass, DOMAIN)
     _LOGGER.info(STARTUP, integration.version)
 
-    coordinator = APIClient(
-        hass, entry.data[CONF_COMPANY], entry.data[CONF_STATION], entry.options
-    )
+    coordinator = APIClient(hass)
 
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = {ATTR_COORDINATOR: coordinator}
