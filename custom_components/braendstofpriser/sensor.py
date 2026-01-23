@@ -8,7 +8,9 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.core import callback
+from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.util import slugify as util_slugify
 
 from .api import APIClient
 from .const import ATTR_COORDINATOR, DOMAIN
@@ -41,18 +43,22 @@ class BraendstofpriserSensor(CoordinatorEntity[APIClient], SensorEntity):
         self._product_key = product_key
         self._product_info = product_info
         self._attr_name = f"{product_info['name']}"
-        self._attr_unique_id = (
-            f"{coordinator.company}_{coordinator.station}_{product_key}"
+        self._attr_unique_id = util_slugify(
+            f"{self.coordinator._last_data['company']['name']}_{self.coordinator._last_data['station']['name']}_{product_key}"
         )
 
-        self._attr_device_info = {
-            "identifiers": {
-                (DOMAIN, coordinator.company, coordinator.station, product_key)
+        self._attr_device_info = DeviceInfo(
+            identifiers={
+                (
+                    DOMAIN,
+                    self.coordinator._last_data["company"]["name"],
+                    self.coordinator._last_data["station"]["name"],
+                )
             },
-            "name": self.coordinator.products[self._product_key]["name"],
-            "manufacturer": f"{coordinator.company}, {coordinator.station}",
-            "model": self.coordinator.products[self._product_key]["name"],
-        }
+            name=f"{self.coordinator._last_data['company']['name']} {self.coordinator._last_data['station']['name']}",
+            manufacturer=f"{self.coordinator._last_data['company']['name']}, {self.coordinator._last_data['station']['name']}",
+            model=product_key,
+        )
 
         self._attr_native_value = self.coordinator.products[self._product_key]["price"]
 
