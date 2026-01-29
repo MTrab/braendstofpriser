@@ -8,16 +8,13 @@
 This integration will provide fuel prices from the companies in Denmark that are publishing prices to their webpages.<br>
 Not all companies does this, thus not all companies are available in the integration.
 
-If you stumble across a company providing public prices, that are not available in the integration, [please create an issue providing the full URL to the webpage showing the prices](https://github.com/MTrab/pybraendstofpriser/issues/new).
-
 ## Table of Content
 
 [**Installation**](#installation)
 
 [**Setup**](#setup)
 
-[**Currently supported companies**](#currently-supported-companies)
- 
+
 
 ## Installation:
 
@@ -50,15 +47,4 @@ Or go to Home Assistant > Settings > Integrations
 
 Add "Brændstofpriser" integration _(If it doesn't show, try CTRL+F5 to force a refresh of the page)_
 
-## Currently supported companies
 
-These are the companies that the integration currently supports:
-
-*   [F24](https://f24.dk)
-*   [Go'On](https://goon.nu)
-*   [OIL! tank & go](https://www.oil-tankstationer.dk)
-*   [OK](https://www.ok.dk)
-*   [Q8](https://www.q8.dk)
-*   [Shell](https://shellservice.dk)
-
-If you stumble across a company providing public prices, that are not available in the integration, [please create an issue providing the full URL to the webpage showing the prices](https://github.com/MTrab/braendstofpriser/issues/new?template=new_company.yml).
